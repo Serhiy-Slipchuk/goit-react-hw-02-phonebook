@@ -1,0 +1,42 @@
+.heading {
+    position: relative;
+    margin: 50px 0 0;
+    padding-top: 20px;
+    font-size: 30px;
+    text-align: center;
+    letter-spacing: 0.15em;
+    color: orange;
+
+    &::after {
+        position: absolute;
+        top: 0;
+        left: 50%;
+        content: '';
+        display: block;
+        height: 2px;
+        width: 100px;
+        background-color: orange;
+        transform: translateX(-50%);
+    }
+}
+
+.contactsList {
+    display: block;
+    min-height: 30px;
+    margin: 20px 5px;
+    padding-left: 20px;
+    font-size: 16px;
+    color: white;
+    list-style-type: circle;
+    border: 1px solid orange;
+    border-radius: 10px;
+}
+
+.contactText {
+    font-weight: 500;
+    color: orange;
+}
+
+.phoneText {
+    color: white;
+}
