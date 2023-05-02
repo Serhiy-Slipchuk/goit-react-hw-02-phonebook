@@ -1,9 +1,10 @@
 import css from './ContactsForm.module.scss'
+import PropTypes from 'prop-types'
 
 
-const ContactsForm = function({ addContact, onChangeInput, name }) {
+const ContactsForm = function({ onSubmitForm, onChangeInput, name }) {
     return (
-        <form className={css.form} onSubmit={addContact}>
+        <form className={css.form} onSubmit={onSubmitForm}>
         <label>
         <input
             className={css.input}
@@ -19,7 +20,12 @@ const ContactsForm = function({ addContact, onChangeInput, name }) {
         <button className={css.button} type="submit">Add contact</button>
     </form>
     )
-    
+}
+
+ContactsForm.propTypes = {
+    onSubmitForm: PropTypes.func.isRequired,
+    onChangeInput: PropTypes.func.isRequired,
+    name: PropTypes.string.isRequired
 }
 
 export default ContactsForm

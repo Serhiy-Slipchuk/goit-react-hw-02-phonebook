@@ -14,11 +14,8 @@ export class App extends Component {
 
   addContact = (event) => {
     event.preventDefault();
-    this.setState({contacts: [...this.state.contacts, {id: nanoid(5), name: this.state.name}]});
-    this.setState({name: ''})
-    setTimeout(()=>{
-      console.log(this.state.contacts);
-    }, 500)
+    this.setState(prevState => ({contacts: [...prevState.contacts, {id: nanoid(5), name: this.state.name}]}));
+    this.setState({name: ''});
   }
 
   handlerInputChange = (event) => {
@@ -38,7 +35,7 @@ export class App extends Component {
       >
         <div className={css.phonebookThumb}>
           <h1 className={css.title}>Phonebook</h1>
-          <ContactsForm addContact={this.addContact} onChangeInput={this.handlerInputChange} name={this.state.name}/>
+          <ContactsForm onSubmitForm={this.addContact} onChangeInput={this.handlerInputChange} name={this.state.name}/>
           <ContactsList contacts={this.state.contacts}/>
         </div>
       </div>
