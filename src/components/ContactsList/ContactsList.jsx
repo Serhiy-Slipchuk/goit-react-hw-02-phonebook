@@ -1,18 +1,31 @@
 import css from './ContactsList.module.scss'
 import PropTypes from 'prop-types'
 
-const ContactsList = function ({ contacts }) {
+const ContactsList = function ({ contacts, filter }) {
     return (
         <>
-            <h1 className={css.heading}>Contacts</h1>
             <ul className={css.contactsList}>
-                {contacts.map(( { id, name, number } ) => {
+                {filter ==='' ?
+                contacts.map(( { id, name, number } ) => {
                     return (
                         <li key={id}>
                             <p className={css.contactText}>{name}<span className={css.phoneText}>{number}</span></p>
                         </li>
                     )
-                })}
+                })
+
+                :
+
+                contacts
+                .filter(({ name })=> name.toLowerCase().includes(filter.toLowerCase()))
+                .map(({ id, name, number }) => {
+                    return (
+                        <li key={id}>
+                            <p className={css.contactText}>{name}<span className={css.phoneText}>{number}</span></p>
+                        </li>
+                    )
+                })
+                }
             </ul>
         </>
     )
@@ -24,7 +37,8 @@ ContactsList.propTypes = {
         name: PropTypes.string.isRequired,
         number: PropTypes.string.isRequired
       })
-    )
+    ),
+    filter: PropTypes.string
 }
 
 export default ContactsList

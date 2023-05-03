@@ -13,3 +13,25 @@
     text-align: center;
     color:orange;
 }
+
+.heading {
+    position: relative;
+    margin: 50px 0 0;
+    padding-top: 20px;
+    font-size: 30px;
+    text-align: center;
+    letter-spacing: 0.15em;
+    color: orange;
+
+    &::after {
+        position: absolute;
+        top: 0;
+        left: 50%;
+        content: '';
+        display: block;
+        height: 2px;
+        width: 100px;
+        background-color: orange;
+        transform: translateX(-50%);
+    }
+}

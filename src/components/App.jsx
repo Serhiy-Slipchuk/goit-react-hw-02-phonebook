@@ -4,11 +4,18 @@ import { Component } from "react";
 import { nanoid } from 'nanoid'
 import ContactsForm from "./ContactsForm/ContactsForm";
 import ContactsList from './ContactsList/ContactsList';
+import Filter from './Filter/Filter';
 
 export class App extends Component {
 
   state = {
-    contacts: [],
+    contacts: [
+      {id: 'id-1', name: 'Rosie Simpson', number: '459-12-56'},
+      {id: 'id-2', name: 'Hermione Kline', number: '443-89-12'},
+      {id: 'id-3', name: 'Eden Clements', number: '645-17-79'},
+      {id: 'id-4', name: 'Annie Copeland', number: '227-91-26'},
+    ],
+    filter: '',
     name: '',
     number: ''
   }
@@ -23,6 +30,9 @@ export class App extends Component {
   handlerInputChange = (event) => {
     const { name, value } = event.target;
     this.setState({ [name]: value });
+    setTimeout(()=>{
+      console.log(this.state);
+    }, 1000)
   }
 
   render() {
@@ -46,8 +56,10 @@ export class App extends Component {
             number={this.state.number}
           />
 
-          <ContactsList contacts={this.state.contacts}/>
-          
+          <h2 className={css.heading}>Contacts</h2>
+          <Filter filter={this.state.filter} onChangeFilter={this.handlerInputChange}/>
+          <ContactsList contacts={this.state.contacts} filter={this.state.filter}/>
+
         </div>
       </div>
     );
