@@ -26,6 +26,10 @@ export class App extends Component {
     this.setState({ [name]: value });
   }
 
+  getExistNames = () => {
+    return this.state.contacts.map(({name}) => name);
+  }
+
   render() {
     return (
       <div
@@ -41,7 +45,7 @@ export class App extends Component {
           <h1 className={css.title}>Phonebook</h1>
 
           <ContactsForm
-            addContact={this.addContact}
+            addContact={this.addContact} existNames={this.getExistNames}
           />
 
           <h2 className={css.heading}>Contacts</h2>

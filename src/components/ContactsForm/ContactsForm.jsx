@@ -18,9 +18,13 @@ class ContactsForm extends Component {
 
     handlerSubmitForm = (event)=>{
         event.preventDefault();
-        const newContact = {id: nanoid(5), name: this.state.name, number: this.state.number}
-        this.setState({name: '', number: ''})
-        this.props.addContact(newContact);
+        if (!this.props.existNames().includes(this.state.name)) {
+            const newContact = {id: nanoid(5), name: this.state.name, number: this.state.number}
+            this.setState({name: '', number: ''})
+            this.props.addContact(newContact);
+        } else {
+            window.alert(`${this.state.name} is already in contacts.`)
+        }
     }
 
     render() {
@@ -59,7 +63,8 @@ class ContactsForm extends Component {
 }
 
 ContactsForm.propTypes = {
-    addContact: PropTypes.func.isRequired
+    addContact: PropTypes.func.isRequired,
+    existNames: PropTypes.func.isRequired,
 }
 
 export default ContactsForm
