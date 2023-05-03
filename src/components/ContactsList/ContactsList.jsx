@@ -1,5 +1,6 @@
 import css from './ContactsList.module.scss'
 import PropTypes from 'prop-types'
+import ContactItem from 'components/ContactItem/ContactItem'
 
 const ContactsList = function ({ contacts, filter }) {
     return (
@@ -7,11 +8,7 @@ const ContactsList = function ({ contacts, filter }) {
             <ul className={css.contactsList}>
                 {filter ==='' ?
                 contacts.map(( { id, name, number } ) => {
-                    return (
-                        <li key={id}>
-                            <p className={css.contactText}>{name}<span className={css.phoneText}>{number}</span></p>
-                        </li>
-                    )
+                    return <ContactItem key={id} name={name} number={number} />
                 })
 
                 :
@@ -19,11 +16,7 @@ const ContactsList = function ({ contacts, filter }) {
                 contacts
                 .filter(({ name })=> name.toLowerCase().includes(filter.toLowerCase()))
                 .map(({ id, name, number }) => {
-                    return (
-                        <li key={id}>
-                            <p className={css.contactText}>{name}<span className={css.phoneText}>{number}</span></p>
-                        </li>
-                    )
+                    return <ContactItem key={id} name={name} number={number} />
                 })
                 }
             </ul>

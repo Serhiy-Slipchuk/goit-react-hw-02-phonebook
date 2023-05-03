@@ -1,7 +1,6 @@
 import css from './App.module.scss'
 import React from "react";
 import { Component } from "react";
-import { nanoid } from 'nanoid'
 import ContactsForm from "./ContactsForm/ContactsForm";
 import ContactsList from './ContactsList/ContactsList';
 import Filter from './Filter/Filter';
@@ -15,24 +14,16 @@ export class App extends Component {
       {id: 'id-3', name: 'Eden Clements', number: '645-17-79'},
       {id: 'id-4', name: 'Annie Copeland', number: '227-91-26'},
     ],
-    filter: '',
-    name: '',
-    number: ''
+    filter: ''
   }
 
-  addContact = (event) => {
-    event.preventDefault();
-    this.setState(prevState => ({contacts: [...prevState.contacts, {id: nanoid(5), name: this.state.name, number: this.state.number}]}));
-    this.setState({name: ''});
-    this.setState({number: ''});
+  addContact = (newContact) => {
+    this.setState(prevState => ({contacts: [...prevState.contacts, newContact ]}));
   }
 
   handlerInputChange = (event) => {
     const { name, value } = event.target;
     this.setState({ [name]: value });
-    setTimeout(()=>{
-      console.log(this.state);
-    }, 1000)
   }
 
   render() {
@@ -50,10 +41,7 @@ export class App extends Component {
           <h1 className={css.title}>Phonebook</h1>
 
           <ContactsForm
-            onSubmitForm={this.addContact}
-            onChangeInput={this.handlerInputChange}
-            name={this.state.name}
-            number={this.state.number}
+            addContact={this.addContact}
           />
 
           <h2 className={css.heading}>Contacts</h2>
