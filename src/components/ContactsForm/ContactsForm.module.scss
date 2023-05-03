@@ -1,11 +1,19 @@
 .form {
     display: block;
+
+    & label {
+        margin-left: 20px;
+        margin-bottom: 5px;
+        font-size: 20px;
+        color:orange;
+    }
 }
 
 .input {
     display: block;
     margin-left: auto;
     margin-right: auto;
+    margin-bottom: 20px;
     padding: 10px 20px;
     width: 250px;
     height: 30px;

@@ -9,17 +9,20 @@ export class App extends Component {
 
   state = {
     contacts: [],
-    name: ''
+    name: '',
+    number: ''
   }
 
   addContact = (event) => {
     event.preventDefault();
-    this.setState(prevState => ({contacts: [...prevState.contacts, {id: nanoid(5), name: this.state.name}]}));
+    this.setState(prevState => ({contacts: [...prevState.contacts, {id: nanoid(5), name: this.state.name, number: this.state.number}]}));
     this.setState({name: ''});
+    this.setState({number: ''});
   }
 
   handlerInputChange = (event) => {
-    this.setState({name: event.currentTarget.value})
+    const { name, value } = event.target;
+    this.setState({ [name]: value });
   }
 
   render() {
@@ -35,8 +38,16 @@ export class App extends Component {
       >
         <div className={css.phonebookThumb}>
           <h1 className={css.title}>Phonebook</h1>
-          <ContactsForm onSubmitForm={this.addContact} onChangeInput={this.handlerInputChange} name={this.state.name}/>
+
+          <ContactsForm
+            onSubmitForm={this.addContact}
+            onChangeInput={this.handlerInputChange}
+            name={this.state.name}
+            number={this.state.number}
+          />
+
           <ContactsList contacts={this.state.contacts}/>
+          
         </div>
       </div>
     );

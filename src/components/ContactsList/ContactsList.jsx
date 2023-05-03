@@ -6,10 +6,10 @@ const ContactsList = function ({ contacts }) {
         <>
             <h1 className={css.heading}>Contacts</h1>
             <ul className={css.contactsList}>
-                {contacts.map(( { id, name } ) => {
+                {contacts.map(( { id, name, number } ) => {
                     return (
                         <li key={id}>
-                            <p className={css.contactText}>{name}</p>
+                            <p className={css.contactText}>{name}<span className={css.phoneText}>{number}</span></p>
                         </li>
                     )
                 })}
@@ -21,7 +21,8 @@ const ContactsList = function ({ contacts }) {
 ContactsList.propTypes = {
     contacts: PropTypes.arrayOf(PropTypes.shape({
         id: PropTypes.string.isRequired,
-        name: PropTypes.string.isRequired
+        name: PropTypes.string.isRequired,
+        number: PropTypes.string.isRequired
       })
     )
 }
