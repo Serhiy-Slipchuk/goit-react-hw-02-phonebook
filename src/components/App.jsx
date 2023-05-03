@@ -21,6 +21,14 @@ export class App extends Component {
     this.setState(prevState => ({contacts: [...prevState.contacts, newContact ]}));
   }
 
+  deleteContact = (id) => {
+    this.setState((prevState) => {
+      const index = prevState.contacts.findIndex(contact => contact.id === id);
+      const updatedContacts = prevState.contacts.splice(index, 1);
+      return {...updatedContacts};
+    })
+  }
+
   handlerInputChange = (event) => {
     const { name, value } = event.target;
     this.setState({ [name]: value });
@@ -50,7 +58,7 @@ export class App extends Component {
 
           <h2 className={css.heading}>Contacts</h2>
           <Filter filter={this.state.filter} onChangeFilter={this.handlerInputChange}/>
-          <ContactsList contacts={this.state.contacts} filter={this.state.filter}/>
+          <ContactsList contacts={this.state.contacts} filter={this.state.filter} contactToDelete={this.deleteContact}/>
 
         </div>
       </div>
