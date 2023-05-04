@@ -8,7 +8,12 @@ const ContactsList = function ({ contacts, filter, contactToDelete }) {
             <ul className={css.contactsList}>
                 {filter ==='' ?
                 contacts.map(( { id, name, number } ) => {
-                    return <ContactItem key={id} name={name} number={number} id={id} contactToDelete={contactToDelete}/>
+                    return <ContactItem
+                        key={id}
+                        name={name}
+                        number={number}
+                        id={id}
+                        contactToDelete={contactToDelete}/>
                 })
 
                 :
@@ -16,7 +21,12 @@ const ContactsList = function ({ contacts, filter, contactToDelete }) {
                 contacts
                 .filter(({ name })=> name.toLowerCase().includes(filter.toLowerCase()))
                 .map(({ id, name, number }) => {
-                    return <ContactItem key={id} name={name} number={number} id={id} contactToDelete={contactToDelete}/>
+                    return <ContactItem
+                        key={id} 
+                        name={name} 
+                        number={number} 
+                        id={id} 
+                        contactToDelete={contactToDelete}/>
                 })
                 }
             </ul>

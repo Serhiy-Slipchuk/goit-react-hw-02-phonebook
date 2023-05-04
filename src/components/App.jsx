@@ -53,12 +53,20 @@ export class App extends Component {
           <h1 className={css.title}>Phonebook</h1>
 
           <ContactsForm
-            addContact={this.addContact} existNames={this.getExistNames}
+            addContact={this.addContact}
+            existNames={this.getExistNames}
           />
 
           <h2 className={css.heading}>Contacts</h2>
-          <Filter filter={this.state.filter} onChangeFilter={this.handlerInputChange}/>
-          <ContactsList contacts={this.state.contacts} filter={this.state.filter} contactToDelete={this.deleteContact}/>
+
+          <Filter 
+            filter={this.state.filter} 
+            onChangeFilter={this.handlerInputChange}/>
+
+          <ContactsList 
+            contacts={this.state.contacts} 
+            filter={this.state.filter} 
+            contactToDelete={this.deleteContact}/>
 
         </div>
       </div>
