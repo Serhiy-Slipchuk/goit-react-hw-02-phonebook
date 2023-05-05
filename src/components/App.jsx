@@ -1,42 +1,47 @@
-import css from './App.module.scss'
-import React from "react";
-import { Component } from "react";
-import ContactsForm from "./ContactsForm/ContactsForm";
+import css from './App.module.scss';
+import React from 'react';
+import { Component } from 'react';
+import ContactsForm from './ContactsForm/ContactsForm';
 import ContactsList from './ContactsList/ContactsList';
 import Filter from './Filter/Filter';
 
 export class App extends Component {
-
   state = {
     contacts: [
-      {id: 'id-1', name: 'Rosie Simpson', number: '459-12-56'},
-      {id: 'id-2', name: 'Hermione Kline', number: '443-89-12'},
-      {id: 'id-3', name: 'Eden Clements', number: '645-17-79'},
-      {id: 'id-4', name: 'Annie Copeland', number: '227-91-26'},
+      { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
+      { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
+      { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
+      { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
     ],
-    filter: ''
-  }
+    filter: '',
+  };
 
-  addContact = (newContact) => {
-    this.setState(prevState => ({contacts: [...prevState.contacts, newContact ]}));
-  }
+  addContact = newContact => {
+    this.setState(prevState => ({
+      contacts: [...prevState.contacts, newContact],
+    }));
+  };
 
-  deleteContact = (id) => {
-    this.setState((prevState) => {
-      const index = prevState.contacts.findIndex(contact => contact.id === id);
-      const updatedContacts = prevState.contacts.splice(index, 1);
-      return {...updatedContacts};
-    })
-  }
+  getFilteredContacts = () => {
+    const { contacts, filter } = this.state;
+    const filteredContacts = contacts.filter(contact =>
+      contact.name.toLowerCase().includes(filter.toLowerCase())
+    );
+    return filteredContacts;
+  };
 
-  handlerInputChange = (event) => {
+  deleteContact = id => {
+    this.setState(prevState => ({ contacts: prevState.contacts.filter(contact => contact.id !== id)}));
+  };
+
+  handlerInputChange = event => {
     const { name, value } = event.target;
     this.setState({ [name]: value });
-  }
+  };
 
   getExistNames = () => {
-    return this.state.contacts.map(({name}) => name);
-  }
+    return this.state.contacts.map(({ name }) => name);
+  };
 
   render() {
     return (
@@ -46,7 +51,7 @@ export class App extends Component {
           justifyContent: 'center',
           alignItems: 'center',
           fontSize: 40,
-          color: '#010101'
+          color: '#010101',
         }}
       >
         <div className={css.phonebookThumb}>
@@ -59,17 +64,17 @@ export class App extends Component {
 
           <h2 className={css.heading}>Contacts</h2>
 
-          <Filter 
-            filter={this.state.filter} 
-            onChangeFilter={this.handlerInputChange}/>
+          <Filter
+            filter={this.state.filter}
+            onChangeFilter={this.handlerInputChange}
+          />
 
-          <ContactsList 
-            contacts={this.state.contacts} 
-            filter={this.state.filter} 
-            contactToDelete={this.deleteContact}/>
-
+          <ContactsList
+            contactsFiltered={this.getFilteredContacts}
+            contactToDelete={this.deleteContact}
+          />
         </div>
       </div>
     );
   }
-};
+}
